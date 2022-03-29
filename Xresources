@@ -1,0 +1,14 @@
+URxvt*dynamicColors: on
+URxvt*cursorBlink: on
+URxvt*font: xft:MesloLGS NF:size=10
+URxvt*scrollBar: false
+URxvt*transparent: true
+URxvt*blurRadius: 7
+URxvt*shading: 15
+!URxvt*internalBorder: 32
+URxvt.iso14755: true
+URxvt.iso14755_52: false
+URxvt.url-launcher: /sbin/xdg-open
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+#include "/home/zerobeef/git/iTerm2-Color-Schemes/Xresources/FirefoxDev"

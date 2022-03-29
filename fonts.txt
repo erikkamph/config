@@ -1,0 +1,4 @@
+MesloLGS NF
+JetBrainsMono NF
+Noto Sans
+Noto Sans Emoji

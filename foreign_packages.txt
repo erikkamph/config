@@ -1,0 +1,7 @@
+brave-bin 1:1.36.122-1
+polybar-git 3.6.1.r22.gff6ac9fe-1
+ttf-meslo-nerd-font-powerlevel10k 1.000-3
+visual-studio-code-bin 1.65.2-1
+xorgxrdp-devel-git 0.2.18.r2.g2856e3c-1
+xrdp 0.9.19-2
+yay 11.1.2-1

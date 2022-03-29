@@ -1,0 +1,7 @@
+alias xr="xrdb -load ~/.Xresources"
+alias xm="xrdb -merge ~/.Xresources"
+alias now="echo -e \$(date +'%H:%M')"
+alias ssh="TERM=xterm ssh"
+alias feh="feh --scale"
+alias grep="grep -i"
+alias wireshark="sudo whireshark"
