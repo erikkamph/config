@@ -23,3 +23,5 @@ cp -R config ~/.config
 All of the above copies files to their respective location for easy installation and to quickly get up and running.
 
 ## Alternative installation
+```
+wget -O - https://raw.githubusercontent.com/erikkamph/config/main/install.sh | bash -s -
