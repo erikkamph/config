@@ -33,3 +33,4 @@ All of the above copies files to their respective location for easy installation
 ## Alternative installation
 ```
 wget -O - https://raw.githubusercontent.com/erikkamph/config/main/install.sh | bash -s -
+```
