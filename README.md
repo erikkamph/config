@@ -14,19 +14,7 @@ yay -S $(cat foreign_packages.txt | cut -d " " -f 1 | tr "\n" " ")
 2. The command above installs all the foreign packages. Packages such as webbrowsers, fonts for powerlevel-10k used in zsh and other programs. A requirement to use the command above is that yay is installed on the system that which the packages shall be installed on.
 <br>
 ```
-cp Xresources ~/.Xresources
-```
-```
-cp xinitrc ~/.xinitrc
-```
-```
-cp zshrc ~/.zshrc
-```
-```
-cp ohmyzsh-custom/* $ZSH_CUSTOM/
-```
-```
-cp -R config ~/.config
+cp Xresources ~/.Xresources && cp xinitrc ~/.xinitrc && cp zshrc ~/.zshrc && cp ohmyzsh-custom/* $ZSH_CUSTOM/ && cp -R config ~/.config
 ```
 All of the above copies files to their respective location for easy installation and to quickly get up and running.
 
