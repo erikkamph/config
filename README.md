@@ -16,7 +16,7 @@ yay -S $(cat foreign_packages.txt | cut -d " " -f 1 | tr "\n" " ")
 ```
 cp Xresources ~/.Xresources && cp xinitrc ~/.xinitrc && cp zshrc ~/.zshrc && cp ohmyzsh-custom/* $ZSH_CUSTOM/ && cp -R config ~/.config
 ```
-All of the above copies files to their respective location for easy installation and to quickly get up and running.
+3. All of the above copies files to their respective location for easy installation and to quickly get up and running.
 
 ## Alternative installation
 ```
