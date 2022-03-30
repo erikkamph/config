@@ -12,7 +12,7 @@ It will also install fonts such as Noto Sans and Noto Sans Emoji which is the st
 yay -S $(cat foreign_packages.txt | cut -d " " -f 1 | tr "\n" " ")
 ```
 2. The command above installs all the foreign packages. Packages such as webbrowsers, fonts for powerlevel-10k used in zsh and other programs. A requirement to use the command above is that yay is installed on the system that which the packages shall be installed on.
-<br>
+<br><br>
 ```
 cp Xresources ~/.Xresources && cp xinitrc ~/.xinitrc && cp zshrc ~/.zshrc && cp ohmyzsh-custom/* $ZSH_CUSTOM/ && cp -R config ~/.config
 ```
