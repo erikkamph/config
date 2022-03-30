@@ -1,0 +1,8 @@
+ copy ip,ip addr show | grep -Eo "inet.*$(systemctl | grep -Eo "dhcpcd on .*" | sed "s/dhcpcd on //g" | head -n 1)" | sed -e "s/inet //g" -e "s/ brd.*//g" -e "s/\/[0-9][0-9]//g" | xsel -ib
+^sep()
+勒 reload polybar,bash -c "~/.config/polybar/launch.sh"
+勒 reload i3, i3-msg -s $(i3 --get-socketpath) restart
+^sep()
+ lock, i3lock -i ~/Downloads/retromac.png -c 272727 -p win -f
+勒 restart, systemctl reboot
+⏻ power off, systemctl poweroff
