@@ -144,7 +144,7 @@ wget -O "$HOME/.FirefoxDev" https://raw.githubusercontent.com/mbadolato/iTerm2-C
     nf=(MesloLGS%20NF%20Bold%20Italic.ttf MesloLGS%20NF%20Bold.ttf MesloLGS%20NF%20Italic.ttf MesloLGS%20NF%20Regular.ttf)
     for font in nf
     do
-        font1="$(echo $font | sed -e "s/\%20/ /g")"
+        font1="$(echo $font | sed -e "s/%20/ /g")"
         wget -O "$font1" "https://github.com/romkatv/powerlevel10k-media/raw/master/$font"
     done
     
