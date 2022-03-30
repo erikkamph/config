@@ -2,12 +2,23 @@
 #-*- encoding: utf-8 -*-
 #Installation script for config files
 
-# Clone the repository
+# Clone the repository where this script is unless it's already cloned
+(
+        (
+                [[ -d "$(pwd)/config" ]] && [[ ! -d "$(pwd)/config/.git" ]]
+        ) || (
+                [[ -d "$(pwd)/config/.git" ]] &&
+                [[  "$(cd "$(pwd)/config" && git remote get-url origin)" != "https://github.com/erikkamph/config.git" ]]
+        ) || [[ ! -d "$(pwd)/config" ]]
+) && {
+    echo "Moving $(pwd)/config to $(pwd)/config.tmp...";
+    mv "$(pwd)/config" "$(pwd)/config.tmp";
+}
 git clone https://github.com/erikkamph/config
 
 # Check two variables installed and foreign_installed if they are already set in the environment
-[[ ! -z "$installed" ]] && [[ ! -z "$foreign_installed" ]] && [[ ! -z "$native" ]] && [[ ! -z "$foreign" ]] && {
-	read -p "Do you want to unset following variables? [installed, foreign_installed, native, foreign] (y/N)" ans
+[[ ! -z "$installed" ]] && [[ ! -z "$foreign_installed" ]] && [[ ! -z "$native" ]] && [[ ! -z "$foreign" ]] && {
+	read -p "Do you want to unset following variables? [installed, foreign_installed, native, foreign] (y/N)" ans;
 	case ans in
 		[yY])
 			unset foreign_installed
@@ -17,8 +28,6 @@ git clone https://github.com/erikkamph/config
 			;;
 	esac
 }
-
-local installed foreign_installed foreign native tmp tmp2
 
 # Set the location of two tmp files to be used when determining packages to install and packages not to install again.
 installed="/tmp/installed_$(date +%s).txt"
@@ -50,11 +59,11 @@ tmp2="$(python -c "import os;print('' if 'ZSH' not in os.environ else os.environ
 # we do not have ohmyzsh and need to
 # install it.
 [[ -z "$tmp" ]] && [[ -z "$tmp2" ]] && {
-	echo "ZSH or ZSH_CUSTOM environment variable is required when installing."
-	echo "Installing oh-my-zsh..."
-	wget -O - https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -
+	echo "ZSH or ZSH_CUSTOM environment variable is required when installing.";
+	echo "Installing oh-my-zsh...";
+	wget -O - https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -;
 } || {
-	echo "YAY! Installing..."
+	echo "YAY! Installing...";
 }
 
 while read -r line;
@@ -65,16 +74,16 @@ done << "$(native)"
 # Install yay if the user hasn't installed
 # yay since before running this script.
 [[ -z "$(which yay)" ]] && {
-    read -p "Do you want to install yay? (Y/n)" ans
+    read -p "Do you want to install yay? (Y/n)" ans;
     [[ "$ans" =~ [yY] ]] && {
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
-        makepkg -si
+        git clone https://aur.archlinux.org/yay.git;
+        cd yay;
+        makepkg -si;
     } || {
-        read -p "yay is recommended for the external packages. Continue anyway? (y/N)" ans
+        read -p "yay is recommended for the external packages. Continue anyway? (y/N)" ans;
         ([[ -z "$ans" ]] || [[ "$ans" =~ [Nn] ]]) && {
-            echo "Aborting..."
-            exit 1
+            echo "Aborting...";
+            exit 1;
         }
     }
 }
@@ -90,8 +99,12 @@ done << "$(native)"
 
 # Copy custom files that contain functions
 # aliases for programs and other configuration
-([[ -d "$ZSH/custom" ]] || [[ -d "$ZSH_CUSTOM/custom" ]]) && {
+[[ -d "$ZSH/custom" ]] && {
     omzfiles=(aliases.zsh functions.zsh keybindings.zsh)
+    for item in omzfiles
+    do
+        cp "$(pwd)/config/ohmyzsh-custom/$item" "$ZSH/custom/$item"
+    done
 }
 
 # Installs generic files that has
@@ -122,11 +135,11 @@ wget -O "$HOME/.FirefoxDev" https://raw.githubusercontent.com/mbadolato/iTerm2-C
         mkdir -p "$HOME/.local/share/fonts"
 }) && {
     tmp3=$(pwd)
-    cd "$HOME/.local/share/fonts"
+    cd "$HOME/.local/share/fonts";
     
-    wget -O JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-    unzip JetBrainsMono.zip
-    rm JetBrainsMono.zip
+    wget -O JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip;
+    unzip JetBrainsMono.zip;
+    rm JetBrainsMono.zip;
     
     nf=(MesloLGS%20NF%20Bold%20Italic.ttf MesloLGS%20NF%20Bold.ttf MesloLGS%20NF%20Italic.ttf MesloLGS%20NF%20Regular.ttf)
     for font in nf
@@ -135,7 +148,7 @@ wget -O "$HOME/.FirefoxDev" https://raw.githubusercontent.com/mbadolato/iTerm2-C
         wget -O "$font1" "https://github.com/romkatv/powerlevel10k-media/raw/master/$font"
     done
     
-    fc-cache
+    fc-cache;
     
     cd "$tmp3"
 }
@@ -143,4 +156,9 @@ wget -O "$HOME/.FirefoxDev" https://raw.githubusercontent.com/mbadolato/iTerm2-C
 # Change default shell on the user from the one that the user has currently to zsh
 chsh -s /bin/zsh $(whoami)
 
-
+# Restore any config file/folder that existed from before starting this script
+[[ -e "$(pwd)/config.tmp" ]] && {
+    echo "Restoring config directory moved earlier...";
+    rm -rf "$(pwd)/config";
+    mv "$(pwd)/config.tmp" "$(pwd)/config";
+}
