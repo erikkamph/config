@@ -88,6 +88,16 @@ done << "$(native)"
     done << "$(echo "$foreign")"
 }
 
+# Copy custom files that contain functions
+# aliases for programs and other configuration
+([[ -d "$ZSH/custom" ]] || [[ -d "$ZSH_CUSTOM/custom" ]]) && {
+    omzfiles=(aliases.zsh functions.zsh keybindings.zsh)
+}
+
+# Installs generic files that has
+# customization for how to startx
+# as well as how the terminal and
+# zsh shall appear
 files=(Xresources xinitrc zshrc zshrc.pre-oh-my-zsh p10k.zsh)
 for item in files
 do
@@ -99,4 +109,38 @@ do
     }
     cp "$(pwd)/config/$item" "$HOME/.$item"
 done
+
+# Installs the color scheme used
+# by Xresources in the terminal
+wget -O "$HOME/.FirefoxDev" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/Xresources/FirefoxDev
+
+# Checks if a local font directory exists
+# If not it creates it and installs the
+# fonts used in the config files for i3,
+# rofi, powerlevel10k and such programs
+([[ -d "$HOME/.local/share/fonts" ]] || {
+        mkdir -p "$HOME/.local/share/fonts"
+}) && {
+    tmp3=$(pwd)
+    cd "$HOME/.local/share/fonts"
+    
+    wget -O JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+    unzip JetBrainsMono.zip
+    rm JetBrainsMono.zip
+    
+    nf=(MesloLGS%20NF%20Bold%20Italic.ttf MesloLGS%20NF%20Bold.ttf MesloLGS%20NF%20Italic.ttf MesloLGS%20NF%20Regular.ttf)
+    for font in nf
+    do
+        font1="$(echo $font | sed -e "s/\%20/ /g")"
+        wget -O "$font1" "https://github.com/romkatv/powerlevel10k-media/raw/master/$font"
+    done
+    
+    fc-cache
+    
+    cd "$tmp3"
+}
+
+# Change default shell on the user from the one that the user has currently to zsh
+chsh -s /bin/zsh $(whoami)
+
 

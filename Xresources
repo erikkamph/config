@@ -11,4 +11,4 @@ URxvt.iso14755_52: false
 URxvt.url-launcher: /sbin/xdg-open
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
-#include "/home/zerobeef/git/iTerm2-Color-Schemes/Xresources/FirefoxDev"
+#include "~/.FirefoxDev"
