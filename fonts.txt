@@ -1,4 +1,5 @@
 MesloLGS NF
 JetBrainsMono NF
-Noto Sans
-Noto Sans Emoji
+Noto Sans (noto-fonos in pacman)
+Noto Sans Emoji (noto-fonts-emoji in pacman)
+Noto Sans Extra (noto-fonts-extra in pacman)
