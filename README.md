@@ -28,7 +28,7 @@
 
 #### Fonts
 There are a variety of fonts used in the configuration of the custom linux build. There is a list of them in [/fonts.txt](fonts.txt), but below are some that are more a requirement if using this type of configuration.
-- [https://www.nerdfonts.com/font-downloads](JetBrainsMono NF)
+- [JetBrainsMono NF](https://www.nerdfonts.com/font-downloads)
 - MesloLGS NF
 
 #### Information about installation
