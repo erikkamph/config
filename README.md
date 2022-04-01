@@ -3,6 +3,7 @@
 ## Sections
 1. [TODO list](#todo-list)
 2. [Configuration information](#configuration-information)
+    1. [Information about installation](#information-about-installation)
 3. [Screenshots and videos](#screenshots-and-videos)
 4. [Installation](#installation)
 
@@ -13,6 +14,7 @@
 
 ### Configuration information
 
+#### Information about installation
 
 ### Screenshots and videos
 ![Screenshot of configuration](1648541004.png)
